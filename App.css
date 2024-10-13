@@ -11,7 +11,7 @@ body {
 nav {
   background-color: #2C3E50;
   padding: 15px 20px;
-  text-align: right; /* Navigation menu set up on the right - not yet functional */
+  text-align: right;
 }
 
 nav ul {
