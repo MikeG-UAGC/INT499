@@ -4,12 +4,14 @@ import StreamList from './components/StreamList';
 import Movies from './components/Movies';
 import Cart from './components/Cart';
 import About from './components/About';
+import NotFound from './components/NotFound';
 import './App.css';
 
 function App() {
   return (
     <Router>
       <div>
+        {/* Navigation Bar */}
         <nav>
           <ul>
             <li>
@@ -26,11 +28,16 @@ function App() {
             </li>
           </ul>
         </nav>
+
+        {/* Routing */}
         <Routes>
           <Route path="/" element={<StreamList />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/about" element={<About />} />
+          
+          {/* Catch-All Route */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>

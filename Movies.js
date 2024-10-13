@@ -1,9 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Movies() {
+  const [moviesList, setMoviesList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  
+  useEffect(() => {
+    
+    setTimeout(() => {
+      const fetchedMovies = [
+        'Waiting',
+        'Deadpool',
+        'The Negotiator',
+        'The Matrix',
+        'Pulp Fiction',
+        'Law Abiding Citizen',
+      ];
+      setMoviesList(fetchedMovies);
+      setLoading(false); // Stop loading after movies are fetched
+    }, 1500);
+  }, []);
+
+  // Filter movies based on the search term
+  const filteredMovies = moviesList.filter((movie) =>
+    movie.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="movies">
-      <h1>Movies</h1>
+    <div>
+      <h1>Movies Page</h1>
+      
+      {/* Search bar */}
+      <input
+        type="text"
+        placeholder="Search movies..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      {/* Show loading message while movies are being fetched */}
+      {loading ? (
+        <p>Loading movies...</p>
+      ) : (
+        <>
+          {/* Display the filtered list of movies only when the user starts searching */}
+          {searchTerm && (
+            <ul>
+              {filteredMovies.length > 0 ? (
+                filteredMovies.map((movie, index) => (
+                  <li key={index}>{movie}</li>
+                ))
+              ) : (
+                <p>No movies found.</p>
+              )}
+            </ul>
+          )}
+        </>
+      )}
     </div>
   );
 }
